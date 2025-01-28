@@ -1,14 +1,41 @@
-# Abalone Dataset Analysis for Age Prediction
-This Assignment is a part of our coursework which involves predicting the age of abalones using their physical measurements. The dataset contains eight variables, with the first seven serving as predictors and the eighth as the response. The results are averaged over 20 random splits of the data, where each split divides the data into 90% for training and 10% for testing. For each split, models are trained on the training set, and the training and test MSE (or R²) are calculated. These results are averaged across the splits and reported. Below is a summary of the results for the different models used:
+# Exploring Clustering with K-Means and Expectation-Maximization (EM)
+This Assignment is a part of our coursework which focuses on experimenting with two clustering techniques, K-Means and Expectation-Maximization (EM), to understand their advantages and disadvantages. The goal is to evaluate the quality of clustering using two metrics: accuracy and the Adjusted Rand Index (ARI). Additionally, the project explores the relationship between clustering performance and the KL divergence between data distributions.
 
-a) Null Model
-The null model serves as the baseline by always predicting the average training response ( ̄y). The average training and test MSE for the null model were computed over 20 random splits, providing a reference point for evaluating other models.
+Part A: Clustering with Varying Data Separation
+Dataset Generation:
+We generate synthetic datasets where one part of the data is distributed normally around the origin, and the other part is shifted along the x-axis by a varying amount. This shift helps analyze how data separation impacts clustering performance.
 
-b) Ordinary Least Squares (OLS) Regression
-OLS regression was computed analytically by solving the normal equations with a regularization parameter λ = 0.001. The average training and test R² and MSE were calculated along with their standard deviations across the splits. Additionally, the average value and standard deviation of the logarithm of the determinant of (X^T)*X + lambda*(I) were reported to understand the stability of the matrix inversion.
+Clustering Analysis:
+For each dataset, we apply both K-Means and EM clustering methods across 10 random initializations (runs). Visualizations are created to compare the clustering results for both methods on one example dataset.
 
-c) Regression Trees
-Regression trees with maximum depths ranging from 1 to 7 were trained and evaluated. For each tree depth, the average training and test R² and MSE were computed. These metrics were plotted against the tree depth to visualize the trade-off between model complexity and performance. The null model MSE was also displayed as a horizontal line for comparison.
+Performance Evaluation:
 
-d) Random Forest Regression
-Random forest regressors were trained with 10, 30, 100, and 300 trees. For each configuration, the average training and test R² and MSE were calculated along with their standard deviations. This analysis highlights the impact of increasing the number of trees on both training and test performance.
+Accuracy: The accuracy of clustering is computed by aligning cluster labels to the true labels for the best match.
+Adjusted Rand Index (ARI): This measures the agreement between true labels and predicted clusters.
+Both metrics are plotted against the level of data separation to understand how K-Means and EM perform under different conditions.
+Visual Representation:
+
+Accuracy vs. Data Separation: Separate dots are plotted for each run, using different colors to represent K-Means and EM.
+ARI vs. Data Separation: Similar dots are plotted for ARI, highlighting differences between the two methods.
+Part B: Clustering with Rotated Covariance Structures
+Random Rotation and Covariance:
+A random rotation matrix is generated to create datasets with varying covariance structures. These datasets include two clusters: one around the origin and another shifted along the x-axis.
+
+KL Divergence:
+The KL divergence between the two cluster distributions is computed to quantify the difference between their shapes and spread.
+
+Clustering Methods:
+
+K-Means with isotropic covariance (no covariance modeling).
+K-Means with full covariance (considering cluster shapes).
+EM clustering, which accounts for full covariance.
+Each method is evaluated across 10 runs.
+Performance Evaluation:
+For each run, the accuracy and ARI of the three methods are computed and analyzed.
+
+Visualization:
+
+Accuracy vs. KL Divergence: Dots are plotted for all runs, with different colors representing the three methods.
+ARI vs. KL Divergence: Similar plots are created for ARI to compare the clustering methods.
+Tabular Results:
+A table is included summarizing the results for all 10 runs, showing the accuracy, ARI, and KL divergence for each method.
